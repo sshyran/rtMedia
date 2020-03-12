@@ -935,33 +935,33 @@ if ( ! class_exists( 'RTMediaAdmin' ) ) {
 					'rtmedia-admin',
 					'RTMedia_Admin_Settings_JS',
 					array(
-						'rtmedia_default_sizes_error_message' => esc_html__( 'Invalid value for [default_size_property].', 'buddypress-media' ),
+						'rtmedia_default_sizes_error_message' => __( 'Invalid value for [default_size_property].', 'buddypress-media' ),
 					)
 				);
 
-				wp_localize_script( 'rtmedia-admin', 'rtmedia_on_label', esc_html__( 'ON', 'buddypress-media' ) );
-				wp_localize_script( 'rtmedia-admin', 'rtmedia_off_label', esc_html__( 'OFF', 'buddypress-media' ) );
+				wp_localize_script( 'rtmedia-admin', 'rtmedia_on_label', __( 'ON', 'buddypress-media' ) );
+				wp_localize_script( 'rtmedia-admin', 'rtmedia_off_label', __( 'OFF', 'buddypress-media' ) );
 				wp_localize_script( 'rtmedia-admin', 'rtmedia_admin_ajax', $admin_ajax );
 				wp_localize_script( 'rtmedia-admin', 'rtmedia_admin_url', admin_url() );
 				/* path for file upload using ajax */
 				wp_localize_script( 'rtmedia-admin', 'rtmedia_fileupload_url', RTMEDIA_URL . 'app/helper/rtUploadAttachment.php' );
 
 				$rtmedia_admin_strings = array(
-					'no_refresh'                    => esc_html__( 'Please do not refresh this page.', 'buddypress-media' ),
-					'something_went_wrong'          => esc_html__( 'Something went wrong. Please ', 'buddypress-media' ) . '<a href onclick="location.reload();">' . esc_html__( 'refresh', 'buddypress-media' ) . '</a>' . esc_html__( ' page.', 'buddypress-media' ),
-					'are_you_sure'                  => esc_html__( 'This will subscribe you to the free plan.', 'buddypress-media' ),
-					'disable_encoding'              => esc_html__( 'Are you sure you want to disable the encoding service?', 'buddypress-media' ),
-					'enable_encoding'               => esc_html__( 'Are you sure you want to enable the encoding service?', 'buddypress-media' ),
-					'settings_changed'              => esc_html__( 'Settings have changed, you should save them!', 'buddypress-media' ),
-					'video_thumbnail_error'         => esc_html__( 'Number of video thumbnails to be generated should be greater than 0 in media sizes settings. Setting it to default value 2.', 'buddypress-media' ),
-					'video_thumbnail_invalid_value' => esc_html__( 'Invalid value for number of video thumbnails in media sizes settings. Setting it to round value', 'buddypress-media' ),
-					'jpeg_quality_negative_error'   => esc_html__( 'Number of percentage in JPEG image quality should be greater than 0 in media sizes settings. Setting it to default value 90.', 'buddypress-media' ),
-					'jpeg_quality_percentage_error' => esc_html__( 'Number of percentage in JPEG image quality should be less than 100 in media sizes settings. Setting it to 100.', 'buddypress-media' ),
-					'jpeg_quality_invalid_value'    => esc_html__( 'Invalid value for percentage in JPEG image quality in media sizes settings. Setting it to round value', 'buddypress-media' ),
-					'per_page_media_negative_value' => esc_html__( 'Please enter positive integer value only. Setting number of media per page value to default value 10.', 'buddypress-media' ),
-					'per_page_media_positive_error' => esc_html__( 'Please enter positive integer value only. Setting number of media per page value to round value', 'buddypress-media' ),
-					'request_failed'                => esc_html__( 'Request failed.', 'buddypress-media' ),
-					'wrong_css_input'               => esc_html__( 'You can not use @import statement in custom css', 'buddypress-media' ),
+					'no_refresh'                    => __( 'Please do not refresh this page.', 'buddypress-media' ),
+					'something_went_wrong'          => __( 'Something went wrong. Please ', 'buddypress-media' ) . '<a href onclick="location.reload();">' . __( 'refresh', 'buddypress-media' ) . '</a>' . __( ' page.', 'buddypress-media' ),
+					'are_you_sure'                  => __( 'This will subscribe you to the free plan.', 'buddypress-media' ),
+					'disable_encoding'              => __( 'Are you sure you want to disable the encoding service?', 'buddypress-media' ),
+					'enable_encoding'               => __( 'Are you sure you want to enable the encoding service?', 'buddypress-media' ),
+					'settings_changed'              => __( 'Settings have changed, you should save them!', 'buddypress-media' ),
+					'video_thumbnail_error'         => __( 'Number of video thumbnails to be generated should be greater than 0 in media sizes settings. Setting it to default value 2.', 'buddypress-media' ),
+					'video_thumbnail_invalid_value' => __( 'Invalid value for number of video thumbnails in media sizes settings. Setting it to round value', 'buddypress-media' ),
+					'jpeg_quality_negative_error'   => __( 'Number of percentage in JPEG image quality should be greater than 0 in media sizes settings. Setting it to default value 90.', 'buddypress-media' ),
+					'jpeg_quality_percentage_error' => __( 'Number of percentage in JPEG image quality should be less than 100 in media sizes settings. Setting it to 100.', 'buddypress-media' ),
+					'jpeg_quality_invalid_value'    => __( 'Invalid value for percentage in JPEG image quality in media sizes settings. Setting it to round value', 'buddypress-media' ),
+					'per_page_media_negative_value' => __( 'Please enter positive integer value only. Setting number of media per page value to default value 10.', 'buddypress-media' ),
+					'per_page_media_positive_error' => __( 'Please enter positive integer value only. Setting number of media per page value to round value', 'buddypress-media' ),
+					'request_failed'                => __( 'Request failed.', 'buddypress-media' ),
+					'wrong_css_input'               => __( 'You can not use @import statement in custom css', 'buddypress-media' ),
 				);
 
 				wp_localize_script( 'rtmedia-admin', 'rtmedia_admin_strings', $rtmedia_admin_strings );
@@ -969,12 +969,12 @@ if ( ! class_exists( 'RTMediaAdmin' ) ) {
 				wp_localize_script( 'rtmedia-admin', 'settings_rt_album_import_url', esc_url( add_query_arg( array( 'page' => 'rtmedia-settings' ), ( is_multisite() ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' ) ) ) ) );
 
 				$rtmedia_admin_support_strings = array(
-					'wp_admin_username_error' => esc_html__( 'Please enter WP Admin Login.', 'buddypress-media' ),
-					'wp_admin_pwd_error'      => esc_html__( 'Please enter WP Admin password.', 'buddypress-media' ),
-					'ssh_ftp_host_error'      => esc_html__( 'Please enter SSH / FTP host.', 'buddypress-media' ),
-					'ssh_ftp_username_error'  => esc_html__( 'Please enter SSH / FTP login.', 'buddypress-media' ),
-					'ssh_ftp_pwd_error'       => esc_html__( 'Please enter SSH / FTP password.', 'buddypress-media' ),
-					'all_fields_error'        => esc_html__( 'Please fill all the fields.', 'buddypress-media' ),
+					'wp_admin_username_error' => __( 'Please enter WP Admin Login.', 'buddypress-media' ),
+					'wp_admin_pwd_error'      => __( 'Please enter WP Admin password.', 'buddypress-media' ),
+					'ssh_ftp_host_error'      => __( 'Please enter SSH / FTP host.', 'buddypress-media' ),
+					'ssh_ftp_username_error'  => __( 'Please enter SSH / FTP login.', 'buddypress-media' ),
+					'ssh_ftp_pwd_error'       => __( 'Please enter SSH / FTP password.', 'buddypress-media' ),
+					'all_fields_error'        => __( 'Please fill all the fields.', 'buddypress-media' ),
 				);
 
 				wp_localize_script( 'rtmedia-admin', 'rtmedia_admin_support_strings', $rtmedia_admin_support_strings );

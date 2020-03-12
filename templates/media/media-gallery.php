@@ -120,7 +120,7 @@ $rand_id = wp_rand( 0, 1000 );
 	<?php } else { ?>
 		<p class="rtmedia-no-media-found">
 			<?php
-			echo esc_html( apply_filters( 'rtmedia_no_media_found_message_filter', __( 'Sorry !! There\'s no media found for the request !!', 'buddypress-media' ) ) );
+			echo esc_html( apply_filters( 'rtmedia_no_media_found_message_filter', __( "Sorry !! There's no media found for the request !!", 'buddypress-media' ) ) );
 			?>
 		</p>
 		<?php

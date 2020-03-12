@@ -59,10 +59,10 @@ if ( ! class_exists( 'RTMediaUploadTermsAdmin' ) && ! is_plugin_active( 'rtmedia
 			wp_enqueue_script( 'rtmedia-upload-terms-main', RTMEDIA_URL . 'app/assets/js/admin-upload-terms' . $suffix . '.js', array( 'jquery' ), RTMEDIA_VERSION, true );
 
 			$translation_data = array(
-				'valid_url'   => esc_html__( 'Please enter valid URL.', 'buddypress-media' ),
-				'terms_msg'   => esc_html__( 'Please enter terms message.', 'buddypress-media' ),
-				'error_msg'   => esc_html__( 'Please enter error message.', 'buddypress-media' ),
-				'privacy_msg' => esc_html__( 'Please enter privacy message.', 'buddypress-media' ),
+				'valid_url'   => __( 'Please enter valid URL.', 'buddypress-media' ),
+				'terms_msg'   => __( 'Please enter terms message.', 'buddypress-media' ),
+				'error_msg'   => __( 'Please enter error message.', 'buddypress-media' ),
+				'privacy_msg' => __( 'Please enter privacy message.', 'buddypress-media' ),
 			);
 
 			wp_localize_script( 'rtmedia-upload-terms-main', 'rtm_upload_terms_error_msgs', $translation_data );
