@@ -527,7 +527,7 @@ jQuery( function( $ ) {
 				} );
 				if ( a !== false ) {
 					window.file_size_info = rtmedia_max_file_msg + this.uploader.settings.max_file_size_msg;
-					if ( rtmedia_version_compare( rtm_wp_version, '3.9' ) ) { // Plupload getting updated in 3.9
+					if ( rtmedia_version_compare( rtMediaData.wpVersion, '3.9' ) ) { // Plupload getting updated in 3.9
 						file_extn = this.uploader.settings.filters.mime_types[0].extensions;
 					} else {
 						file_extn = this.uploader.settings.filters[0].extensions;
@@ -617,7 +617,7 @@ jQuery( function( $ ) {
 						return true;
 					}
 
-					select_btn.attr( 'value', rtmedia_add_more_files_msg );
+					select_btn.attr( 'value', rtMediaData.addMoreFilesMsg );
 					if ( typeof rtmedia_direct_upload_enabled != 'undefined' && rtmedia_direct_upload_enabled == '1' ) {
 						upload_start_btn.hide();
 					} else {
@@ -627,7 +627,7 @@ jQuery( function( $ ) {
 						return true;
 					}
 					var tmp_array = file.name.split( '.' );
-					if ( rtmedia_version_compare( rtm_wp_version, '3.9' ) ) { // Plupload getting updated in 3.9
+					if ( rtmedia_version_compare( rtMediaData.wpVersion, '3.9' ) ) { // Plupload getting updated in 3.9
 						var ext_array = uploaderObj.uploader.settings.filters.mime_types[0].extensions.split( ',' );
 					} else {
 						var ext_array = uploaderObj.uploader.settings.filters[0].extensions.split( ',' );
@@ -642,7 +642,7 @@ jQuery( function( $ ) {
 						return true;
 					}
 
-					if ( rtmedia_version_compare( rtm_wp_version, '3.9' ) ) { // Plupload getting updated in 3.9
+					if ( rtmedia_version_compare( rtMediaData.wpVersion, '3.9' ) ) { // Plupload getting updated in 3.9
 						uploaderObj.uploader.settings.filters.mime_types[0].title;
 					} else {
 						uploaderObj.uploader.settings.filters[0].title;
@@ -770,7 +770,7 @@ jQuery( function( $ ) {
 				} else {
 
 					if ( err.code == -601 ) { // File extension error
-						err.message = rtmedia_file_extension_error_msg;
+						err.message = rtMediaData.fileExtensionErrorMsg;
 					}
 
 					rtmedia_selected_file_list( plupload, err.file, '', err );
@@ -879,8 +879,8 @@ jQuery( function( $ ) {
 					activity_id = rtnObj.activity_id;
 					if ( rtnObj.permalink != '' ) {
 						$( "#" + file.id + " .plupload_file_name" ).html( "<a href='" + rtnObj.permalink + "' target='_blank' title='" + rtnObj.permalink + "'>" + file.title.substring( 0, 40 ).replace( /(<([^>]+)>)/ig, "" ) + "</a>" );
-						$( "#" + file.id + " .plupload_media_edit" ).html( "<a href='" + rtnObj.permalink + "edit' target='_blank'><span title='" + rtmedia_edit_media + "'><i class='dashicons dashicons-edit'></i> " + rtmedia_edit + "</span></a>" );
-						$( "#" + file.id + " .plupload_delete" ).html( "<span id='" + rtnObj.media_id + "' class='rtmedia-delete-uploaded-media dashicons dashicons-dismiss' title='" + rtmedia_delete + "'></span>" );
+						$( "#" + file.id + " .plupload_media_edit" ).html( "<a href='" + rtnObj.permalink + "edit' target='_blank'><span title='" + rtMediaData.editMedia + "'><i class='dashicons dashicons-edit'></i> " + rtMediaData.edit + "</span></a>" );
+						$( "#" + file.id + " .plupload_delete" ).html( "<span id='" + rtnObj.media_id + "' class='rtmedia-delete-uploaded-media dashicons dashicons-dismiss' title='" + rtMediaData.delete + "'></span>" );
 					}
 
 				} catch ( e ) {
@@ -936,7 +936,7 @@ jQuery( function( $ ) {
 
 		jQuery( document ).on( 'click', '.plupload_delete .rtmedia-delete-uploaded-media', function() {
 			var that = $( this );
-			if ( confirm( rtmedia_delete_uploaded_media ) ) {
+			if ( confirm( rtMediaData.deleteUploadedMedia ) ) {
 				var nonce = $( '#rtmedia-upload-container #rtmedia_media_delete_nonce' ).val();
 				var media_id = $( this ).attr( 'id' );
 				var data = {
@@ -1188,7 +1188,7 @@ jQuery( document ).ready( function( $ ) {
 
 				var tmp_array = file.name.split( '.' );
 
-				if ( rtmedia_version_compare( rtm_wp_version, '3.9' ) ) { // Plupload getting updated in 3.9
+				if ( rtmedia_version_compare( rtMediaData.wpVersion, '3.9' ) ) { // Plupload getting updated in 3.9
 					var ext_array = objUploadView.uploader.settings.filters.mime_types[0].extensions.split( ',' );
 				} else {
 					var ext_array = objUploadView.uploader.settings.filters[0].extensions.split( ',' );
@@ -1301,12 +1301,12 @@ jQuery( document ).ready( function( $ ) {
 			if ( typeof rtmedia_direct_upload_enabled != 'undefined' && rtmedia_direct_upload_enabled == '1' ) {
 
 				/*
-				 * add rtmedia_activity_text_with_attachment condition to filter
+				 * add rtMediaData.activityTextWithAttachment condition to filter
 				 * if user want media and activity_text both require
 				 * By: Yahil
 				 */
 				if ( '' === jQuery( '#whats-new' ).val().trim() ) {
-					if ( rtmedia_activity_text_with_attachment == 'disable' ) {
+					if ( rtMediaData.activityTextWithAttachment == 'disable' ) {
 						if ( 0 === jQuery( '#rtmedia_upload_terms_conditions' ).length ) {
 							$( '#whats-new' ).css( 'color', 'transparent' );
 							$( '#whats-new' ).val( '&nbsp;' );
@@ -1384,7 +1384,7 @@ jQuery( document ).ready( function( $ ) {
 				}
 			} else {
 				if ( err.code == -601 ) { // File extension error
-					err.message = rtmedia_file_extension_error_msg;
+					err.message = rtMediaData.fileExtensionErrorMsg;
 				}
 
 				rtmedia_selected_file_list( plupload, err.file, '', err );
@@ -1446,7 +1446,7 @@ jQuery( document ).ready( function( $ ) {
 			 */
 			if ( bp_template_pack && 'legacy' !== bp_template_pack ) {
 
-				if ( 'disable' === rtmedia_activity_text_with_attachment &&  '' === jQuery.trim( jQuery( '#whats-new' ).val() ) ) {
+				if ( 'disable' === rtMediaData.activityTextWithAttachment &&  '' === jQuery.trim( jQuery( '#whats-new' ).val() ) ) {
 					let textarea = jQuery( '#whats-new' );
 					textarea.css( 'color', 'transparent' );
 					textarea.val( '&nbsp;' );
@@ -1544,12 +1544,12 @@ jQuery( document ).ready( function( $ ) {
 							 * Disabled TextBox color(transparent)
 							 * ELSE
 							 * Required Activity text with media
-							 * add rtmedia_activity_text_with_attachment condition to filter
+							 * add rtMediaData.activityTextWithAttachment condition to filter
 		 					 * if user want media and activity_text both require
 		 					 * By: Yahil
 							 */
 
-							if ( rtmedia_activity_text_with_attachment == 'disable') {
+							if ( rtMediaData.activityTextWithAttachment == 'disable') {
 								$( "#whats-new" ).css( 'color', 'transparent' );
 								$( "#whats-new" ).val( '&nbsp;' );
 							} else {
@@ -2504,7 +2504,7 @@ function renderUploadercomment_media( widget_id, parent_id_type ) {
 
 				var tmp_array = file.name.split( '.' );
 
-				if ( rtmedia_version_compare( rtm_wp_version, '3.9' ) ) { // Plupload getting updated in 3.9
+				if ( rtmedia_version_compare( rtMediaData.wpVersion, '3.9' ) ) { // Plupload getting updated in 3.9
 					var ext_array = commentObj[ widget_id ].uploader.settings.filters.mime_types[0].extensions.split( ',' );
 				} else {
 					var ext_array = commentObj[ widget_id ].uploader.settings.filters[0].extensions.split( ',' );
@@ -2685,7 +2685,7 @@ function renderUploadercomment_media( widget_id, parent_id_type ) {
 				}
 			} else {
 				if ( err.code == -601 ) { // File extension error
-					err.message = rtmedia_file_extension_error_msg;
+					err.message = rtMediaData.fileExtensionErrorMsg;
 				}
 
 				rtmedia_selected_file_list( plupload, err.file, '', err, widget_id );

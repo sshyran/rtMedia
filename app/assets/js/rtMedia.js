@@ -9,7 +9,7 @@ function apply_rtMagnificPopup( selector ) {
 		} else {
 			rt_load_more = rtmedia_load_more;
 		}
-		if ( typeof( rtmedia_lightbox_enabled ) != 'undefined' && rtmedia_lightbox_enabled == '1' ) { // If lightbox is enabled.
+		if ( typeof( rtMediaData.lightboxEnabled ) != 'undefined' && rtMediaData.lightboxEnabled == '1' ) { // If lightbox is enabled.
 
 			var old_gallery_media;
 			var current_page;
@@ -234,7 +234,7 @@ function rtmedia_init_action_dropdown( parent ) {
 jQuery( 'document' ).ready( function( $ ) {
 	// When Ajax completed attach media uploader to new activity, applay popup and attach media to comment uploader.
 	jQuery( document ).ajaxComplete( function( event, xhr, settings ) {
-		if ( 'legacy' !== bp_template_pack && bp_template_pack ) {
+		if ( 'legacy' !== rtMediaData.bpTemplatePack && rtMediaData.bpTemplatePack ) {
 			var get_action = get_parameter( 'action', settings.data );
 			if (('activity_filter' === get_action || 'post_update' === get_action || 'get_single_activity_content' === get_action || 'activity_get_older_updates' === get_action) && 'undefined' !== typeof rtmedia_masonry_layout && 'true' === rtmedia_masonry_layout && 'undefined' !== typeof rtmedia_masonry_layout_activity && 'true' === rtmedia_masonry_layout_activity ) {
 				setTimeout( function() {
@@ -278,9 +278,9 @@ jQuery( 'document' ).ready( function( $ ) {
 	$( '#rt_media_comment_form' ).submit( function( e ) {
 		if ( $.trim( $( '#comment_content' ).val() ) == '' ) {
 			if ( jQuery( '#rtmedia-single-media-container' ).length == 0 ) {
-				rtmedia_gallery_action_alert_message( rtmedia_empty_comment_msg, 'warning' );
+				rtmedia_gallery_action_alert_message( rtMediaData.emptyCommentMsg, 'warning' );
 			} else {
-				rtmedia_single_media_alert_message( rtmedia_empty_comment_msg, 'warning' );
+				rtmedia_single_media_alert_message( rtMediaData.emptyCommentMsg, 'warning' );
 			}
 			return false;
 		} else {
@@ -298,9 +298,9 @@ jQuery( 'document' ).ready( function( $ ) {
 	$( 'li.rtmedia-list-item p a' ).each(function( e ) {
 		$( this ).addClass( 'no-popup' );
 	});
-	//Rtmedia_lightbox_enabled from setting
-	if ( typeof( rtmedia_lightbox_enabled ) != 'undefined' && rtmedia_lightbox_enabled == '1' ) {
-            apply_rtMagnificPopup( '.rtmedia-list-media.rtm-gallery-list, .rtmedia-activity-container ul.rtmedia-list, #bp-media-list,.bp-media-sc-list, li.media.album_updated ul,ul.bp-media-list-media, li.activity-item div.activity-content div.activity-inner div.bp_media_content, .rtm-bbp-container, ul.rtm-comment-container' );
+	// rtMediaData.lightboxEnabled from setting.
+	if ( typeof( rtMediaData.lightboxEnabled ) != 'undefined' && rtMediaData.lightboxEnabled == '1' ) {
+        apply_rtMagnificPopup( '.rtmedia-list-media.rtm-gallery-list, .rtmedia-activity-container ul.rtmedia-list, #bp-media-list,.bp-media-sc-list, li.media.album_updated ul,ul.bp-media-list-media, li.activity-item div.activity-content div.activity-inner div.bp_media_content, .rtm-bbp-container, ul.rtm-comment-container' );
 	}
 
 	jQuery.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
@@ -380,7 +380,7 @@ jQuery( 'document' ).ready( function( $ ) {
 
 	jQuery( '.rtmedia-container' ).on( 'click', '.select-all', function( e ) {
 		jQuery( this ).toggleClass( 'unselect-all' ).toggleClass( 'select-all' );
-		jQuery( this ).attr( 'title', rtmedia_unselect_all_visible );
+		jQuery( this ).attr( 'title', rtMediaData.unselectAllVisible );
 		jQuery( '.rtmedia-list input' ).each( function() {
 			jQuery( this ).prop( 'checked', true );
 		} );
@@ -391,7 +391,7 @@ jQuery( 'document' ).ready( function( $ ) {
 
 	jQuery( '.rtmedia-container' ).on( 'click', '.unselect-all', function( e ) {
 		jQuery( this ).toggleClass( 'select-all' ).toggleClass( 'unselect-all' );
-		jQuery( this ).attr( 'title', rtmedia_select_all_visible );
+		jQuery( this ).attr( 'title', rtMediaData.selectAllVisible );
 		jQuery( '.rtmedia-list input' ).each( function() {
 			jQuery( this ).prop( 'checked', false );
 		} );
@@ -459,7 +459,7 @@ jQuery( 'document' ).ready( function( $ ) {
 					jQuery( 'select.rtmedia-user-album-list option[value="' + response + '"]' ).prop( 'selected', true );
 					jQuery( '.rtmedia-create-new-album-container' ).slideToggle();
 					jQuery( '#rtmedia_album_name' ).val( '' );
-					jQuery( '#rtmedia-create-album-modal' ).append( '<div class=\'rtmedia-success rtmedia-create-album-alert\'><b>' + $albumname + '</b>' + rtmedia_album_created_msg + '</div>' );
+					jQuery( '#rtmedia-create-album-modal' ).append( '<div class=\'rtmedia-success rtmedia-create-album-alert\'><b>' + $albumname + '</b>' + rtMediaData.albumCreatedMsg + '</div>' );
 
 					setTimeout( function() {
 						jQuery( '.rtmedia-create-album-alert' ).remove();
@@ -472,34 +472,34 @@ jQuery( 'document' ).ready( function( $ ) {
 				} else if ( typeof response.error != 'undefined' ) {
 					rtmedia_gallery_action_alert_message( response.error, 'warning' );
 				} else {
-					rtmedia_gallery_action_alert_message( rtmedia_something_wrong_msg, 'warning' );
+					rtmedia_gallery_action_alert_message( rtMediaData.somethingWrongMsg, 'warning' );
 				}
 
 				$( '#rtmedia_create_new_album' ).removeAttr( 'disabled' );
 				$( '#rtmedia_create_new_album' ).html( old_val );
 			} );
 		} else {
-			rtmedia_gallery_action_alert_message( rtmedia_empty_album_name_msg, 'warning' );
+			rtmedia_gallery_action_alert_message( rtMediaData.emptyAlbumNameMsg, 'warning' );
 		}
 	} );
 
 	jQuery( '.rtmedia-container' ).on( 'click', '.rtmedia-delete-selected', function( e ) {
 		if ( jQuery( '.rtmedia-list :checkbox:checked' ).length > 0 ) {
-			if ( confirm( rtmedia_selected_media_delete_confirmation ) ) {
-				jQuery( this ).closest( 'form' ).attr( 'action', '../../../' + rtmedia_media_slug + '/delete' ).submit();
+			if ( confirm( rtMediaData.selectedMediaDeleteConfirmation ) ) {
+				jQuery( this ).closest( 'form' ).attr( 'action', '../../../' + rtMediaData.mediaSlug + '/delete' ).submit();
 			}
 		} else {
-			rtmedia_gallery_action_alert_message( rtmedia_no_media_selected, 'warning' );
+			rtmedia_gallery_action_alert_message( rtMediaData.noMediaSelected, 'warning' );
 		}
 	} );
 
 	jQuery( '.rtmedia-container' ).on( 'click', '.rtmedia-move-selected', function( e ) {
 		if ( jQuery( '.rtmedia-list :checkbox:checked' ).length > 0 ) {
-			if ( confirm( rtmedia_selected_media_move_confirmation ) ) {
+			if ( confirm( rtMediaData.selectedMediaMoveConfirmation ) ) {
 				jQuery( this ).closest( 'form' ).attr( 'action', '' ).submit();
 			}
 		} else {
-			rtmedia_gallery_action_alert_message( rtmedia_no_media_selected, 'warning' );
+			rtmedia_gallery_action_alert_message( rtMediaData.noMediaSelected, 'warning' );
 		}
 
 	} );
@@ -716,9 +716,9 @@ jQuery( 'document' ).ready( function( $ ) {
 	var dragArea = jQuery( '#drag-drop-area' );
 	var activityArea = jQuery( '#whats-new' );
 	var content = dragArea.html();
-	jQuery( '#rtmedia-upload-container' ).after( '<div id=\'rtm-drop-files-title\'>' + rtmedia_drop_media_msg + '</div>' );
+	jQuery( '#rtmedia-upload-container' ).after( '<div id=\'rtm-drop-files-title\'>' + rtMediaData.dropMediaMsg + '</div>' );
 	if ( typeof rtmedia_bp_enable_activity != 'undefined' && rtmedia_bp_enable_activity == '1' ) {
-		jQuery( '#whats-new-textarea' ).append( '<div id=\'rtm-drop-files-title\'>' + rtmedia_drop_media_msg + '</div>' );
+		jQuery( '#whats-new-textarea' ).append( '<div id=\'rtm-drop-files-title\'>' + rtMediaData.dropMediaMsg + '</div>' );
 	}
 	jQuery( document )
 			.on( 'dragover', function( e ) {
@@ -771,7 +771,7 @@ jQuery( 'document' ).ready( function( $ ) {
 
 	jQuery( '.rtmedia-container' ).on( 'click', '.rtmedia-delete-album', function( e ) {
 		e.preventDefault();
-		if ( confirm( rtmedia_album_delete_confirmation ) ) {
+		if ( confirm( rtMediaData.albumDeleteConfirmation ) ) {
 			jQuery( this ).closest( 'form' ).submit();
 		}
 	} );
@@ -859,7 +859,7 @@ jQuery( 'document' ).ready( function( $ ) {
 	 */
 	jQuery( '.rtmedia-container' ).on( 'click', '.rtm-delete-media', function( e ) {
 		e.preventDefault();
-		var confirmation = RTMedia_Main_JS.media_delete_confirmation;
+		var confirmation = rtMediaData.mediaDeleteConfirmation;
 
 		if ( confirm( confirmation ) ) { // If user confirms, send ajax request to delete the selected media
 			var curr_li = jQuery( this ).closest( 'li' );
@@ -874,7 +874,7 @@ jQuery( 'document' ).ready( function( $ ) {
 			};
 
 			jQuery.ajax( {
-				url: RTMedia_Main_JS.rtmedia_ajaxurl,
+				url: rtMediaData.ajaxurl,
 				type: 'POST',
 				data: data,
 				dataType: 'JSON',
@@ -882,7 +882,7 @@ jQuery( 'document' ).ready( function( $ ) {
 
 					if ( 'rtmedia-media-deleted' === response.data.code ) {
 						//Media delete
-						rtmedia_gallery_action_alert_message( RTMedia_Main_JS.media_delete_success, 'success' );
+						rtmedia_gallery_action_alert_message( rtMediaData.mediaDeleteSuccess, 'success' );
 						curr_li.remove();
 
 						if ( 'undefined' !== typeof rtmedia_masonry_layout && 'true' === rtmedia_masonry_layout ) {
@@ -960,8 +960,8 @@ function rtm_masonry_reload( el ) {
          showChars: 100,
          minHideChars: 10,
          ellipsesText: '...',
-         moreText: rtmedia_read_more,
-         lessText: rtmedia__show_less,
+         moreText: rtMediaData.readMore,
+         lessText: rtMediaData.showLess,
          onLess: function() {},
          onMore: function() {},
          errMsg: null,
