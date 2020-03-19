@@ -34,12 +34,12 @@ jQuery( function( $ ) {
 
 
 	var o_is_album, o_is_edit_allowed;
-	if ( typeof ( rtMediaBackboneActivityData.isAlbum ) == 'undefined' ) {
+	if ( 'undefined' === typeof rtMediaBackboneActivityData || typeof ( rtMediaBackboneActivityData.isAlbum ) === 'undefined' ) {
 		o_is_album = new Array( '' );
 	} else {
 		o_is_album = rtMediaBackboneActivityData.isAlbum;
 	}
-	if ( typeof ( rtMediaBackboneActivityData.isEditAllowed ) == 'undefined' ) {
+	if ( 'undefined' === typeof rtMediaBackboneActivityData || typeof ( rtMediaBackboneActivityData.isEditAllowed ) === 'undefined' ) {
 		o_is_edit_allowed = new Array( '' );
 	} else {
 		o_is_edit_allowed = rtMediaBackboneActivityData.isEditAllowed;
@@ -284,7 +284,7 @@ jQuery( function( $ ) {
 				$( that.el ).html( '' );
 			}
 
-			if ( typeof ( rtMediaBackboneData.loadMoreOrPagination ) != 'undefined' && rtMediaBackboneData.loadMoreOrPagination == 'pagination' || ( 1 == rtMedia.gallery.page ) ) {
+			if ( typeof ( rtMediaBackboneData ) !== 'undefined' && typeof ( rtMediaBackboneData.loadMoreOrPagination ) !== 'undefined' && rtMediaBackboneData.loadMoreOrPagination === 'pagination' || ( 1 == rtMedia.gallery.page ) ) {
 				$( that.el ).html( '' );
 			}
 
@@ -307,7 +307,7 @@ jQuery( function( $ ) {
 				$( that.el ).siblings( '.rtmedia_next_prev' ).children( '#rtMedia-galary-next' ).show();
 				//$("#rtMedia-galary-next").show();
 			}
-			if ( 'undefined' != typeof rtMediaData.masonryLayout && 'true' == rtMediaData.masonryLayout && 0 == jQuery( '.rtmedia-container .rtmedia-list.rtm-no-masonry' ).length ) {
+			if ( 'undefined' !== typeof rtMediaData && 'undefined' !== typeof rtMediaData.masonryLayout && 'true' === rtMediaData.masonryLayout && 0 === jQuery( '.rtmedia-container .rtmedia-list.rtm-no-masonry' ).length ) {
 				rtm_masonry_reload( rtm_masonry_container );
 			}
 			$( '#media_fatch_loader' ).removeClass('load');
@@ -572,7 +572,7 @@ jQuery( function( $ ) {
 
 				activity_id = -1;
 				var hook_respo = rtMediaHook.call( 'rtmedia_js_after_files_uploaded' );
-				if ( typeof rtMediaData.galleryReloadOnUpload != 'undefined' && rtMediaData.galleryReloadOnUpload == '1' ) { //Reload gallery view when upload completes if enabled( by default enabled)
+				if ( 'undefined' !== typeof rtMediaData && typeof rtMediaData.galleryReloadOnUpload !== 'undefined' && rtMediaData.galleryReloadOnUpload === '1' ) { //Reload gallery view when upload completes if enabled( by default enabled)
 					if ( hook_respo != false ) {
 						galleryObj.reloadView();
 					}
@@ -618,7 +618,7 @@ jQuery( function( $ ) {
 					}
 
 					select_btn.attr( 'value', rtMediaData.addMoreFilesMsg );
-					if ( typeof rtMediaData.directUploadEnabled != 'undefined' && rtMediaData.directUploadEnabled == '1' ) {
+					if ( typeof rtMediaData !== 'undefined' && typeof rtMediaData.directUploadEnabled !== 'undefined' && rtMediaData.directUploadEnabled === '1' ) {
 						upload_start_btn.hide();
 					} else {
 						upload_start_btn.show();
@@ -743,7 +743,7 @@ jQuery( function( $ ) {
 
 				rtMediaHook.call( 'rtmedia_js_after_files_added', [ up, files ] );
 
-				if ( typeof rtMediaData.directUploadEnabled != 'undefined' && rtMediaData.directUploadEnabled == '1' ) {
+				if ( typeof rtMediaData !== 'undefined' && typeof rtMediaData.directUploadEnabled !== 'undefined' && rtMediaData.directUploadEnabled === '1' ) {
 					var allow_upload = rtMediaHook.call( 'rtmedia_js_upload_file', { src: 'uploader' } );
 					if ( allow_upload == false ) {
 						return false;
@@ -923,7 +923,7 @@ jQuery( function( $ ) {
 				* 'enabled_ext' will get value of enabled media types if nothing is enabled,
 				* then an error message will be displayed.
 				*/
-				if ( 'object' === typeof rtMediaBackboneShortcode.pluploadConfig ) {
+				if ( 'undefined' !== typeof rtMediaBackboneShortcode && 'object' === typeof rtMediaBackboneShortcode.pluploadConfig ) {
 					var enabled_ext = rtMediaBackboneShortcode.pluploadConfig.filters[0].extensions.length;
 					if ( 0 === enabled_ext ) {
 						// If no media type is enabled error message will be displayed.
@@ -1300,7 +1300,7 @@ jQuery( document ).ready( function( $ ) {
 				}
 			} );
 
-			if ( typeof rtMediaData.directUploadEnabled != 'undefined' && rtMediaData.directUploadEnabled == '1' ) {
+			if ( typeof rtMediaData !== 'undefined' && typeof rtMediaData.directUploadEnabled !== 'undefined' && rtMediaData.directUploadEnabled === '1' ) {
 
 				/*
 				 * add rtMediaData.activityTextWithAttachment condition to filter
@@ -2106,8 +2106,8 @@ function rtmedia_on_activity_add(){
 
 function rtmedia_single_page_popup_close(){
   	/* on close of popup resize the video height */
-    if( typeof rtMediaSizeConfig != 'undefined' ){
-        if( typeof rtMediaSizeConfig.video.activity_media != 'undefined' ){
+    if( typeof rtMediaSizeConfig !== 'undefined' ){
+        if( typeof rtMediaSizeConfig.video.activity_media !== 'undefined' ){
             jQuery( '.rtmedia-single-container .rtmedia-comment-media-container .mejs-container.mejs-video' ).css({
                 'height': rtMediaSizeConfig.video.activity_media.height,
                 'width': rtMediaSizeConfig.video.activity_media.width
@@ -2135,7 +2135,7 @@ function rtmedia_comment_media_uplaod_button_disble( widget_id, $value ){
 }
 
 function rtmedia_apply_popup_to_media(){
-	if ( typeof( rtMediaData.lightboxEnabled ) != 'undefined' && rtMediaData.lightboxEnabled == '1' ) {
+	if ( typeof( rtMediaData ) !== 'undefined' && typeof( rtMediaData.lightboxEnabled ) !== 'undefined' && rtMediaData.lightboxEnabled === '1' ) {
 		apply_rtMagnificPopup( '.rtmedia-comment-media-container ul.rtmedia-comment-media-list, .rtmedia-list-media.rtm-gallery-list, .rtmedia-activity-container ul.rtmedia-list, #bp-media-list,.bp-media-sc-list, li.media.album_updated ul,ul.bp-media-list-media, li.activity-item div.activity-content div.activity-inner div.bp_media_content, .rtm-bbp-container, ul.rtm-comment-container' );
 	}
 }
@@ -2269,7 +2269,7 @@ function rtmedia_activity_comment_js_add_media_id(){
 			widget_id = 'activity-'+originalOptions.data.form_id
 
 			var rtmedia_disable_media = 1;
-			if( typeof rtMediaData.disableMediaInCommentedMedia != 'undefined' ){
+			if ( typeof rtMediaData !== 'undefined' && typeof rtMediaData.disableMediaInCommentedMedia !== 'undefined' ){
 				rtmedia_disable_media = rtMediaData.disableMediaInCommentedMedia;
 			}
 
@@ -2622,7 +2622,7 @@ function renderUploadercomment_media( widget_id, parent_id_type ) {
 
 			rtMediaHook.call( 'rtmedia_js_after_files_added', [ upl, rfiles ] );
 
-			if ( 'undefined' != typeof rtMediaData.directUploadEnabled && '1' == rtMediaData.directUploadEnabled ) {
+			if ( 'undefined' !== typeof rtMediaData && 'undefined' !== typeof rtMediaData.directUploadEnabled && '1' === rtMediaData.directUploadEnabled ) {
 
 				jQuery( '.rtmedia-comment-media-submit-' + widget_id ).focus();
 				/* when direct upload is enable */

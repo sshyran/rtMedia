@@ -229,7 +229,7 @@ jQuery( document ).ready( function () {
             rtp_display_terms_warning( terms_conditions_checkbox.parent( '.rtmedia-upload-terms' ), rtmedia_upload_terms_data.message );
         }
 
-        if ( 'undefined' !== typeof rtMediaData.directUploadEnabled && '1' === rtMediaData.directUploadEnabled ) {
+        if ( 'undefined' !== typeof rtMediaData && 'undefined' !== typeof rtMediaData.directUploadEnabled && '1' === rtMediaData.directUploadEnabled ) {
             var whats_new_submit = jQuery( '#aw-whats-new-submit' );
 
             if ( whats_new_submit.length ) {

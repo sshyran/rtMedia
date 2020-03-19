@@ -9,7 +9,7 @@ function apply_rtMagnificPopup( selector ) {
 		} else {
 			rt_load_more = rtmedia_load_more;
 		}
-		if ( typeof( rtMediaData.lightboxEnabled ) != 'undefined' && rtMediaData.lightboxEnabled == '1' ) { // If lightbox is enabled.
+		if ( typeof( rtMediaData ) !== 'undefined' && typeof( rtMediaData.lightboxEnabled ) !== 'undefined' && rtMediaData.lightboxEnabled === '1' ) { // If lightbox is enabled.
 
 			var old_gallery_media;
 			var current_page;
@@ -236,7 +236,7 @@ jQuery( 'document' ).ready( function( $ ) {
 	jQuery( document ).ajaxComplete( function( event, xhr, settings ) {
 		if ( 'legacy' !== rtMediaData.bpTemplatePack && rtMediaData.bpTemplatePack ) {
 			var get_action = get_parameter( 'action', settings.data );
-			if (('activity_filter' === get_action || 'post_update' === get_action || 'get_single_activity_content' === get_action || 'activity_get_older_updates' === get_action) && 'undefined' !== typeof rtMediaData.masonryLayout && 'true' === rtMediaData.masonryLayout && 'undefined' !== typeof rtMediaData.masonryLayoutActivity && 'true' === rtMediaData.masonryLayoutActivity ) {
+			if (('activity_filter' === get_action || 'post_update' === get_action || 'get_single_activity_content' === get_action || 'activity_get_older_updates' === get_action) && 'undefined' !== typeof rtMediaData && 'undefined' !== typeof rtMediaData.masonryLayout && 'true' === rtMediaData.masonryLayout && 'undefined' !== typeof rtMediaData.masonryLayoutActivity && 'true' === rtMediaData.masonryLayoutActivity ) {
 				setTimeout( function() {
 					apply_rtMagnificPopup( '.rtmedia-list-media.rtm-gallery-list, .rtmedia-activity-container ul.rtmedia-list, #bp-media-list,.bp-media-sc-list, li.media.album_updated ul,ul.bp-media-list-media, li.activity-item div.activity-content div.activity-inner div.bp_media_content, .rtm-bbp-container, ul.rtm-comment-container' );
 					rtmedia_activity_masonry();
@@ -299,7 +299,7 @@ jQuery( 'document' ).ready( function( $ ) {
 		$( this ).addClass( 'no-popup' );
 	});
 	// rtMediaData.lightboxEnabled from setting.
-	if ( typeof( rtMediaData.lightboxEnabled ) != 'undefined' && rtMediaData.lightboxEnabled == '1' ) {
+	if ( typeof( rtMediaData ) !== 'undefined' && typeof( rtMediaData.lightboxEnabled ) !== 'undefined' && rtMediaData.lightboxEnabled === '1' ) {
         apply_rtMagnificPopup( '.rtmedia-list-media.rtm-gallery-list, .rtmedia-activity-container ul.rtmedia-list, #bp-media-list,.bp-media-sc-list, li.media.album_updated ul,ul.bp-media-list-media, li.activity-item div.activity-content div.activity-inner div.bp_media_content, .rtm-bbp-container, ul.rtm-comment-container' );
 	}
 
@@ -717,7 +717,7 @@ jQuery( 'document' ).ready( function( $ ) {
 	var activityArea = jQuery( '#whats-new' );
 	var content = dragArea.html();
 	jQuery( '#rtmedia-upload-container' ).after( '<div id=\'rtm-drop-files-title\'>' + rtMediaData.dropMediaMsg + '</div>' );
-	if ( typeof rtMediaData.bpEnableActivity != 'undefined' && rtMediaData.bpEnableActivity == '1' ) {
+	if ( typeof rtMediaData !== 'undefined' && typeof rtMediaData.bpEnableActivity !== 'undefined' && rtMediaData.bpEnableActivity === '1' ) {
 		jQuery( '#whats-new-textarea' ).append( '<div id=\'rtm-drop-files-title\'>' + rtMediaData.dropMediaMsg + '</div>' );
 	}
 	jQuery( document )
@@ -728,7 +728,7 @@ jQuery( 'document' ).ready( function( $ ) {
 					return;
 				}
 				jQuery( '#rtm-media-gallery-uploader' ).show();
-				if ( typeof rtMediaData.bpEnableActivity != 'undefined' && rtMediaData.bpEnableActivity == '1' ) {
+				if ( typeof rtMediaData !== 'undefined' && typeof rtMediaData.bpEnableActivity !== 'undefined' && rtMediaData.bpEnableActivity === '1' ) {
 					activityArea.addClass( 'rtm-drag-drop-active' );
 				}
 
@@ -740,7 +740,7 @@ jQuery( 'document' ).ready( function( $ ) {
 				if ( e.originalEvent.pageX != 0 && e.originalEvent.pageY != 0 ) {
 					return false;
 				}
-				if ( typeof rtMediaData.bpEnableActivity != 'undefined' && rtMediaData.bpEnableActivity == '1' ) {
+				if ( typeof rtMediaData !== 'undefined' && typeof rtMediaData.bpEnableActivity !== 'undefined' && rtMediaData.bpEnableActivity === '1' ) {
 					activityArea.removeClass( 'rtm-drag-drop-active' );
 					activityArea.removeAttr( 'style' );
 				}
@@ -752,7 +752,7 @@ jQuery( 'document' ).ready( function( $ ) {
 				e.preventDefault();
 				/* Put cursor into activity box after dropping any media */
 				jQuery( '.bp-suggestions' ).focus();
-				if ( typeof rtMediaData.bpEnableActivity != 'undefined' && rtMediaData.bpEnableActivity == '1' ) {
+				if ( typeof rtMediaData !== 'undefined' && typeof rtMediaData.bpEnableActivity !== 'undefined' && rtMediaData.bpEnableActivity === '1' ) {
 					activityArea.removeClass( 'rtm-drag-drop-active' );
 					activityArea.removeAttr( 'style' );
 				}
@@ -804,7 +804,7 @@ jQuery( 'document' ).ready( function( $ ) {
 	}
 
 	// Masonry code for activity
-	if ( typeof rtMediaData.masonryLayout != 'undefined' && rtMediaData.masonryLayout == 'true' && typeof rtMediaData.masonryLayoutActivity != 'undefined' && rtMediaData.masonryLayoutActivity == 'true' ) {
+	if ( typeof rtMediaData !== 'undefined' && typeof rtMediaData.masonryLayout !== 'undefined' && rtMediaData.masonryLayout == 'true' && typeof rtMediaData.masonryLayoutActivity != 'undefined' && rtMediaData.masonryLayoutActivity === 'true' ) {
 		// Arrange media into masonry view
 		rtmedia_activity_masonry();
 	}
@@ -813,13 +813,13 @@ jQuery( 'document' ).ready( function( $ ) {
 	jQuery( document ).ajaxComplete( function( event, xhr, settings ) {
 		var get_action = get_parameter( 'action', settings.data );
 
-		if ( ( 'post_update' === get_action || 'get_single_activity_content' === get_action || 'activity_get_older_updates' === get_action ) && typeof rtMediaData.masonryLayout != 'undefined' && rtMediaData.masonryLayout == 'true' && typeof rtMediaData.masonryLayoutActivity != 'undefined' && rtMediaData.masonryLayoutActivity == 'true' ) {
+		if ( ( 'post_update' === get_action || 'get_single_activity_content' === get_action || 'activity_get_older_updates' === get_action ) && typeof rtMediaData !== 'undefined' && typeof rtMediaData.masonryLayout !== 'undefined' && rtMediaData.masonryLayout === 'true' && typeof rtMediaData.masonryLayoutActivity !== 'undefined' && rtMediaData.masonryLayoutActivity === 'true' ) {
 			rtmedia_activity_masonry();
 		}
 	} );
 
 	// Masonry code
-	if ( typeof rtMediaData.masonryLayout != 'undefined' && rtMediaData.masonryLayout == 'true' && jQuery( '.rtmedia-container .rtmedia-list.rtm-no-masonry' ).length == 0 ) {
+	if ( typeof rtMediaData !== 'undefined' && typeof rtMediaData.masonryLayout !== 'undefined' && rtMediaData.masonryLayout === 'true' && jQuery( '.rtmedia-container .rtmedia-list.rtm-no-masonry' ).length === 0 ) {
 		rtm_masonry_container = jQuery( '.rtmedia-container .rtmedia-list' );
 		rtm_masonry_container.masonry( {
 			itemSelector: '.rtmedia-list-item'
@@ -885,7 +885,7 @@ jQuery( 'document' ).ready( function( $ ) {
 						rtmedia_gallery_action_alert_message( rtMediaData.mediaDeleteSuccess, 'success' );
 						curr_li.remove();
 
-						if ( 'undefined' !== typeof rtMediaData.masonryLayout && 'true' === rtMediaData.masonryLayout ) {
+						if ( typeof rtMediaData !== 'undefined' && 'undefined' !== typeof rtMediaData.masonryLayout && 'true' === rtMediaData.masonryLayout ) {
 							rtm_masonry_reload( rtm_masonry_container );
 						}
 
@@ -1093,7 +1093,7 @@ function rtm_masonry_reload( el ) {
 })( jQuery );
 
 window.onload = function() {
-	if ( 'undefined' != typeof rtMediaData.masonryLayout && 'true' == rtMediaData.masonryLayout && 0 == jQuery( '.rtmedia-container .rtmedia-list.rtm-no-masonry' ).length ) {
+	if ( 'undefined' !== typeof rtMediaData && 'undefined' !== typeof rtMediaData.masonryLayout && 'true' === rtMediaData.masonryLayout && 0 === jQuery( '.rtmedia-container .rtmedia-list.rtm-no-masonry' ).length ) {
 		rtm_masonry_reload( rtm_masonry_container );
 	}
 
