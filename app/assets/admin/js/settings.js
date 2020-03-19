@@ -35,7 +35,7 @@ jQuery( document ).ready( function ( $ ) {
 			action: 'rtmedia_linkback',
 			linkback: jQuery( '#bp-media-add-linkback:checked' ).length
 		};
-		jQuery.post( rtmedia_admin_ajax, data, function ( response ) {
+		jQuery.post( rtMediaAdminData.adminAjax, data, function ( response ) {
 		} );
 	} );
 
@@ -203,7 +203,7 @@ jQuery( document ).ready( function ( $ ) {
 		e.preventDefault();
 		if ( confirm( rtmedia_admin_strings.are_you_sure ) ) {
 			var data = {
-				src   : rtmedia_admin_url + "images/wpspin_light.gif"
+				src   : rtMediaAdminData.adminUrl + "images/wpspin_light.gif"
 			};
 
 			jQuery( this ).after( rtMediaAdmin.templates.rtm_image( data ) );
@@ -240,7 +240,7 @@ jQuery( document ).ready( function ( $ ) {
 
 		if ( jQuery( this ).next( 'img' ).length == 0 ) {
 			var data = {
-				src   : rtmedia_admin_url + "images/wpspin_light.gif"
+				src   : rtMediaAdminData.adminUrl + "images/wpspin_light.gif"
 			};
 
 			jQuery( this ).after( rtMediaAdmin.templates.rtm_image( data ) );
@@ -286,7 +286,7 @@ jQuery( document ).ready( function ( $ ) {
 		e.preventDefault();
 		if ( confirm( rtmedia_admin_strings.disable_encoding ) ) {
 			var data = {
-				src   : rtmedia_admin_url + "images/wpspin_light.gif"
+				src   : rtMediaAdminData.adminUrl + "images/wpspin_light.gif"
 			};
 
 			jQuery( this ).after( rtMediaAdmin.templates.rtm_image( data ) );
@@ -336,7 +336,7 @@ jQuery( document ).ready( function ( $ ) {
 
 		if ( confirm( rtmedia_admin_strings.enable_encoding ) ) {
 			var data = {
-				src   : rtmedia_admin_url + "images/wpspin_light.gif"
+				src   : rtMediaAdminData.adminUrl + "images/wpspin_light.gif"
 			};
 
 			jQuery( this ).after( rtMediaAdmin.templates.rtm_image( data ) );
@@ -392,7 +392,7 @@ jQuery( document ).ready( function ( $ ) {
 					jQuery( this ).dialog( "close" );
 
 					var data = {
-						src   : rtmedia_admin_url + "images/wpspin_light.gif"
+						src   : rtMediaAdminData.adminUrl + "images/wpspin_light.gif"
 					};
 
 					var bpm_unsubscribe = $( '.bpm-unsubscribe' );
@@ -462,7 +462,7 @@ jQuery( document ).ready( function ( $ ) {
 					jQuery.post( ajaxurl, {
 						action: 'rtmedia_privacy_redirect'
 					}, function ( response ) {
-						window.location = settings_url;
+						window.location = rtMediaAdminData.settingsUrl;
 					} );
 				}
 			} else {
@@ -655,7 +655,7 @@ jQuery( document ).ready( function ( $ ) {
 			action: 'rtmedia_rt_album_cleanup',
 			rtm_wpnonce: jQuery('#bpaimporter_wpnonce').val()
 		}, function ( response ) {
-			window.location = settings_rt_album_import_url;
+			window.location = rtMediaAdminData.settingsRtAlbumImportUrl;
 		} );
 
 	} );
@@ -689,7 +689,7 @@ jQuery( document ).ready( function ( $ ) {
 
 		if ( !jQuery( '.bpm-ajax-loader' ).length ) {
 			var data = {
-				src   : rtmedia_admin_url + "images/wpspin_light.gif",
+				src   : rtMediaAdminData.adminUrl + "images/wpspin_light.gif",
 				class : 'bpm-ajax-loader',
 				norefresh : rtmedia_admin_strings.no_refresh
 			};
@@ -788,7 +788,7 @@ jQuery( document ).ready( function ( $ ) {
 
 	jQuery( '.updated' ).on( 'click', '.bpm-hide-encoding-notice', function () {
 		var data = {
-			src   : rtmedia_admin_url + "images/wpspin_light.gif"
+			src   : rtMediaAdminData.adminUrl + "images/wpspin_light.gif"
 		};
 
 		jQuery( this ).after( rtMediaAdmin.templates.rtm_image( data ) );
@@ -820,10 +820,10 @@ jQuery( document ).ready( function ( $ ) {
 	var onData = '';
 	var offData = '';
 
-	if ( rtmedia_on_label !== undefined )
-		onData = 'data-on-label="' + rtmedia_on_label + '"';
-	if ( rtmedia_off_label !== undefined )
-		offData = 'data-off-label="' + rtmedia_off_label + '"';
+	if ( rtMediaAdminData.onLabel !== undefined )
+		onData = 'data-on-label="' + rtMediaAdminData.onLabel + '"';
+	if ( rtMediaAdminData.offLabel !== undefined )
+		offData = 'data-off-label="' + rtMediaAdminData.offLabel + '"';
 
 	var files;
 	/* upload file immediately after selecting it */
@@ -979,7 +979,7 @@ jQuery( document ).ready( function ( $ ) {
 		data.append( 'action', 'rtmedia_admin_upload' );
 
 		jQuery.ajax({
-			url: rtmedia_admin_ajax,
+			url: rtMediaAdminData.adminAjax,
 			type: 'POST',
 			data: data,
 			cache: false,
@@ -1098,7 +1098,7 @@ function rtmedia_addon_do_not_show() {
 	var data = {
 		action: 'rtmedia_addon_popup_not_show_again'
 	};
-	jQuery.post( rtmedia_admin_ajax, data, function ( response ) {
+	jQuery.post( rtMediaAdminData.adminAjax, data, function ( response ) {
 		jQuery( '#TB_window' ).remove();
 		jQuery( '#TB_overlay' ).remove();
 	} );

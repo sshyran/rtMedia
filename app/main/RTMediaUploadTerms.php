@@ -76,13 +76,15 @@ if ( ! class_exists( 'RTMediaUploadTerms' ) && ! is_plugin_active( 'rtmedia-uplo
 					'rtmedia-upload-terms-main',
 					'rtmedia_upload_terms_data',
 					array(
-						'message'                => esc_js( $general_upload_terms_error_message ),
+						'message'                => esc_html( $general_upload_terms_error_message ),
 						'activity_terms_enabled' => ( ! empty( $rtmedia->options['activity_enable_upload_terms'] ) ) ? esc_js( 'true' ) : esc_js( 'false' ),
 						'uploader_terms_enabled' => ( ! empty( $rtmedia->options['general_enable_upload_terms'] ) ) ? esc_js( 'true' ) : esc_js( 'false' ),
 					)
 				);
 
-				wp_localize_script( 'rtmedia-main', 'rtmedia_upload_terms_check_terms_message', esc_js( $general_upload_terms_error_message ) );
+				wp_localize_script( 'rtmedia-main', 'rtMediaUploadTermsMainScriptData', array(
+					'checkTermsMessage' => esc_html( $general_upload_terms_error_message )
+				) );
 			}
 		}
 

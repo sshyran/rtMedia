@@ -939,12 +939,15 @@ if ( ! class_exists( 'RTMediaAdmin' ) ) {
 					)
 				);
 
-				wp_localize_script( 'rtmedia-admin', 'rtmedia_on_label', __( 'ON', 'buddypress-media' ) );
-				wp_localize_script( 'rtmedia-admin', 'rtmedia_off_label', __( 'OFF', 'buddypress-media' ) );
-				wp_localize_script( 'rtmedia-admin', 'rtmedia_admin_ajax', $admin_ajax );
-				wp_localize_script( 'rtmedia-admin', 'rtmedia_admin_url', admin_url() );
-				/* path for file upload using ajax */
-				wp_localize_script( 'rtmedia-admin', 'rtmedia_fileupload_url', RTMEDIA_URL . 'app/helper/rtUploadAttachment.php' );
+				$rtmedia_admin_data = array(
+					'onLabel'                  => __( 'ON', 'buddypress-media' ),
+					'offLabel'                 => __( 'OFF', 'buddypress-media' ),
+					'adminAjax'                => esc_url( $admin_ajax ),
+					'adminUrl'                 => esc_url( admin_url() ),
+					'fileUploadUrl'            => esc_url( RTMEDIA_URL . 'app/helper/rtUploadAttachment.php' ),
+					'settingsUrl'              => esc_url( add_query_arg( array( 'page' => 'rtmedia-settings' ), ( is_multisite() ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' ) ) ) ) . '#privacy_enabled',
+					'settingsRtAlbumImportUrl' => esc_url( add_query_arg( array( 'page' => 'rtmedia-settings' ), ( is_multisite() ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' ) ) ) ),
+				);
 
 				$rtmedia_admin_strings = array(
 					'no_refresh'                    => __( 'Please do not refresh this page.', 'buddypress-media' ),
@@ -965,8 +968,6 @@ if ( ! class_exists( 'RTMediaAdmin' ) ) {
 				);
 
 				wp_localize_script( 'rtmedia-admin', 'rtmedia_admin_strings', $rtmedia_admin_strings );
-				wp_localize_script( 'rtmedia-admin', 'settings_url', esc_url( add_query_arg( array( 'page' => 'rtmedia-settings' ), ( is_multisite() ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' ) ) ) ) . '#privacy_enabled' );
-				wp_localize_script( 'rtmedia-admin', 'settings_rt_album_import_url', esc_url( add_query_arg( array( 'page' => 'rtmedia-settings' ), ( is_multisite() ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' ) ) ) ) );
 
 				$rtmedia_admin_support_strings = array(
 					'wp_admin_username_error' => __( 'Please enter WP Admin Login.', 'buddypress-media' ),
@@ -978,6 +979,7 @@ if ( ! class_exists( 'RTMediaAdmin' ) ) {
 				);
 
 				wp_localize_script( 'rtmedia-admin', 'rtmedia_admin_support_strings', $rtmedia_admin_support_strings );
+				wp_localize_script( 'rtmedia-admin', 'rtMediaAdminData', $rtmedia_admin_data );
 
 				// Only one CSS file should enqueue.
 				wp_enqueue_style( 'rtmedia-admin', RTMEDIA_URL . 'app/assets/admin/css/admin' . $suffix . '.css', '', RTMEDIA_VERSION );
