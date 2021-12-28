@@ -26,9 +26,9 @@ function start_services() {
 # Remove cache plugins
 function remove_cache_plugins () {
 
-    rm -r "$GITHUB_WORKSPACE/plugins/wp-redis"
+    rm -rf "$GITHUB_WORKSPACE/plugins/wp-redis"
 
-    rm -r "$GITHUB_WORKSPACE/base/plugins/wp-redis"
+    rm -rf "$GITHUB_WORKSPACE/base/plugins/wp-redis"
 }
 
 # Create, setup and populate rtmedia base site
@@ -39,8 +39,10 @@ function create_and_configure_base_site () {
     rsync -azh $GITHUB_WORKSPACE/base/ $SITE_ROOT/wp-content/
     echo "127.0.0.1 $SITE_NAME" >> /etc/hosts
     wp user create bob test@example.com --role=administrator --user_pass=password
-    wp plugin install buddypress --activate 
-    wp plugin install buddypress-media --activate
+    wp plugin install buddypress 
+    wp plugin activate buddypress
+    wp plugin install buddypress-media 
+    wp plugin activate buddypress-media
 }
 
 
