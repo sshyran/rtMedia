@@ -1,5 +1,6 @@
-on:
-  pull_request: # Run this action when push event triggers.
+on: 
+  push:
+  # pull_request: # Run this action when push event triggers.
     branches: # Run this action on specified branches
       - rtmedia/automation
 
