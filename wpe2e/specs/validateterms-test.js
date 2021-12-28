@@ -3,7 +3,6 @@ import { loginUser } from '@wordpress/e2e-test-utils';
 describe( 'validate terms and services', () => { 
 	it( 'enable terms and services', async () => {
        await loginUser();
-       await page.waitForSelector("#adminmenu");
        const t2 = await page.$x("//li[@id='toplevel_page_rtmedia-settings']");
        await t2[0].click();
        await page.waitForSelector("#bp_media_settings_form");

@@ -8,14 +8,22 @@ describe( 'Upload media from activity', () => {
        await page.click("#whats-new");
        await page.type("#whats-new", "test");
        
-      const elementHandle = await page.$("button[id='rtmedia-add-media-button-post-update'] span[class='dashicons dashicons-admin-media']");
+       const [fileChooser] = await Promise.all([
+        page.waitForFileChooser(),
+        page.click("button[id='rtmedia-add-media-button-post-update'] span[class='dashicons dashicons-admin-media']"),
+        ]);
+    await fileChooser.accept(['download.png'])
 
-      await elementHandle.uploadFile('download.png');
+   
+      const element = await page.$("#rtmedia_upload_terms_conditions");
+      if(element){
+        await element.click()
+      }
        await page.click("#aw-whats-new-submit");
 
        await page.waitForSelector(".activity-list.bp-list .activity-item");
        
-    } );
+    } );    
     
 } );
 

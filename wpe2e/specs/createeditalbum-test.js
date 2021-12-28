@@ -9,8 +9,10 @@ describe( 'Able to create and edit the album', () => {
 
     await page.waitForSelector(".screen-content");
     await page.waitForSelector("#members-list");
-    await page.click("li[class='item-entry odd is-online is-current-user'] h2[class='list-title member-name']");
 
+    const t2 = await page.$x("//a[contains(text(),'bob')]");
+		await t2[0].click();
+    
 
     await page.waitForSelector("#object-nav");
     await page.click("#user-media");
@@ -37,8 +39,8 @@ describe( 'Able to create and edit the album', () => {
 
        await page.waitForSelector(".screen-content");
        await page.waitForSelector("#members-list");
-       await page.click("li[class='item-entry odd is-online is-current-user'] h2[class='list-title member-name']");
-
+       const t2 = await page.$x("//a[contains(text(),'bob')]");
+       await t2[0].click();
        await page.waitForSelector("#object-nav");
        await page.click("#user-media");
        
