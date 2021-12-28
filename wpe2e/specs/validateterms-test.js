@@ -3,11 +3,13 @@ import { loginUser } from '@wordpress/e2e-test-utils';
 describe( 'validate terms and services', () => { 
 	it( 'enable terms and services', async () => {
        await loginUser();
-       await page.click("#toplevel_page_rtmedia-settings");
+       await page.waitForSelector("#adminmenu");
+       const t2 = await page.$x("//li[@id='toplevel_page_rtmedia-settings']");
+       await t2[0].click();
        await page.waitForSelector("#bp_media_settings_form");
        await page.waitForSelector("#rtm-settings-tabs");
        await page.click("#tab-rtmedia-general");
-       const element = await page.$("#rtm-form-checkbox-25");
+       const element = await page.$("label[for='rtm-form-checkbox-24'] span[class='switch-label']");
        const isCheckBoxChecked = await (await element.getProperty("checked")).jsonValue();
         if(! isCheckBoxChecked ){
           await element.click()
