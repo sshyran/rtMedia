@@ -38,11 +38,11 @@ function create_and_configure_base_site () {
     cd $SITE_ROOT
     rsync -azh $GITHUB_WORKSPACE/base/ $SITE_ROOT/wp-content/
     echo "127.0.0.1 $SITE_NAME" >> /etc/hosts
-    wp user create bob test@example.com --role=administrator --user_pass=password
-    wp plugin install buddypress 
-    wp plugin activate buddypress
-    wp plugin install buddypress-media 
-    wp plugin activate buddypress-media
+    wp user create bob test@example.com --role=administrator --user_pass=password --allow-root
+    wp plugin install buddypress --allow-root
+    wp plugin activate buddypress --allow-root
+    wp plugin install buddypress-media --allow-root
+    wp plugin activate buddypress-media --allow-root
 }
 
 
