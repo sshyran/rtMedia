@@ -78,7 +78,6 @@ function main() {
     remove_cache_plugins
     create_and_configure_base_site
     install_wpe2e_package
-    create_reference_screenshots
     deploy_pr_code_to_site
     run_wpe2e_tests
 
