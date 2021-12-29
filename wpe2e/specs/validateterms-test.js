@@ -3,9 +3,9 @@ import { loginUser } from '@wordpress/e2e-test-utils';
 describe( 'validate terms and services', () => { 
 	it( 'enable terms and services', async () => {
        await loginUser();
-       const t2 = await page.$x("//li[@id='toplevel_page_rtmedia-settings']");
-       await t2[0].click();
-       await page.waitForSelector("#bp_media_settings_form");
+       await page.waitForSelector("#adminmenu");
+       await page.click("a[class='wp-has-submenu wp-has-current-submenu wp-menu-open menu-top toplevel_page_rtmedia-settings menu-top-last'] div[class='wp-menu-name']");
+      await page.waitForSelector("#bp_media_settings_form");
        await page.waitForSelector("#rtm-settings-tabs");
        await page.click("#tab-rtmedia-general");
        const element = await page.$("label[for='rtm-form-checkbox-24'] span[class='switch-label']");
@@ -21,12 +21,10 @@ describe( 'validate terms and services', () => {
 
     it( 'validate terms and service', async () => {
         await loginUser();
-        await page.click("body > div:nth-child(3) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(3) > a:nth-child(1)")
         const url = page.url();
         await page.goto(url + "/activity");
         await page.click("#whats-new");
         await page.type("#whats-new", "test");
-      
         await page.click("#aw-whats-new-submit");
  
         await page.waitForSelector(".rt_alert_msg");

@@ -1,8 +1,12 @@
 import { loginUser } from '@wordpress/e2e-test-utils';
 
 describe( 'Upload media from activity', () => { 
+
+  beforeAll( async () => {
+    await loginUser();
+} );
+
 	it( ' should upload media from activity successfully', async () => {
-       await loginUser();
        const url = page.url();
        await page.goto(url + "/activity");
        await page.click("#whats-new");
