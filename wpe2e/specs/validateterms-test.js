@@ -3,24 +3,32 @@ import { loginUser, visitAdminPage } from '@wordpress/e2e-test-utils';
 describe( 'validate terms and services', () => { 
 
 	it( 'enable terms and services', async () => {
-       await loginUser();
-       const url = page.url();
-       await page.goto(url + "admin.php?page=rtmedia-settings");
-      await page.waitForSelector("#bp_media_settings_form");
-       await page.waitForSelector("#rtm-settings-tabs");
-       await page.click("#tab-rtmedia-general");
-       const element = await page.$("#rtm-form-checkbox-24");
-       const isCheckBoxChecked = await (await element.getProperty("checked")).jsonValue();
-        if(! isCheckBoxChecked ){
-          await element.click()
-          await page.type("#rtm-form-text-0", "https://google.com/")
-        }
-  
-        await page.click("div[class='rtm-button-container top'] input[value='Save Settings']");
-       await page.waitForSelector(".rtm-success.rtm-fly-warning.rtm-save-settings-msg");
-    } );
+
+    await page.goto("http://rtmedia.test/wp-admin");
+
+    await page.type("#user_login", "bob");
+    await page.type("#user_pass", "password");
+    await page.click("#wp-submit");
+
+      await visitAdminPage("/index.php");
+       await page.click("#toplevel_page_rtmedia-settings");
+        await page.waitForSelector('#tab-rtmedia-general', {timeout: 50000});
+        await page.click('#tab-rtmedia-general');
+     
+        const element = await page.$("#rtm-form-checkbox-24");
+        const isCheckBoxChecked = await (await element.getProperty("checked")).jsonValue();
+         if(! isCheckBoxChecked ){
+           await element.click()
+           await page.type("#rtm-form-text-0", "https://google.com/")
+         }
+   
+         await page.click("div[class='rtm-button-container top'] input[value='Save Settings']");
+        await page.waitForSelector(".rtm-success.rtm-fly-warning.rtm-save-settings-msg");
+
+      } );
 
     it( 'validate terms and service', async () => {
+
         await loginUser();
         const url = page.url();
         await page.goto(url + "/activity");
