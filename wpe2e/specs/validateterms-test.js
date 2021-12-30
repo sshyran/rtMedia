@@ -2,7 +2,7 @@ import { loginUser, visitAdminPage } from '@wordpress/e2e-test-utils';
 
 var _config = require("../node_modules/@wordpress/e2e-test-utils/build/shared/config");
 var siteurl = new URL(_config.WP_BASE_URL);
-
+console.log("Site URL ==== "+ siteurl);
 
 
 describe( 'validate terms and services', () => { 
