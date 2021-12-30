@@ -9,7 +9,7 @@ describe( 'validate terms and services', () => {
 
 	it( 'enable terms and services', async () => {
 
-    await page.goto(siteurl + "/wp-admin");
+    await page.goto(siteurl + "/wp-login.php");
 
     await page.type("#user_login", "bob");
     await page.type("#user_pass", "password");
