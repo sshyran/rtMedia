@@ -1,10 +1,15 @@
 import { loginUser, visitAdminPage } from '@wordpress/e2e-test-utils';
 
+var _config = require("../node_modules/@wordpress/e2e-test-utils/build/shared/config");
+var siteurl = new URL(_config.WP_BASE_URL);
+
+
+
 describe( 'validate terms and services', () => { 
 
 	it( 'enable terms and services', async () => {
 
-    await page.goto("http://rtmedia.test/wp-admin");
+    await page.goto(siteurl + "/wp-admin");
 
     await page.type("#user_login", "bob");
     await page.type("#user_pass", "password");
