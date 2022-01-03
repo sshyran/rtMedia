@@ -1,12 +1,37 @@
-import { loginUser } from '@wordpress/e2e-test-utils';
+import { loginUser, visitAdminPage} from '@wordpress/e2e-test-utils';
+
+
+var _config = require("../node_modules/@wordpress/e2e-test-utils/build/shared/config");
+var siteurl = new URL(_config.WP_BASE_URL);
 
 describe( 'Upload media from activity', () => { 
 
-  beforeAll( async () => {
-    await loginUser();
-} );
+it( 'enable upload on activity', async () => {
+
+  await page.goto(siteurl + "/wp-login.php");
+
+  await page.type("#user_login", "bob");
+  await page.type("#user_pass", "password");
+  await page.click("#wp-submit");
+
+    await visitAdminPage("/index.php");
+     await page.click("#toplevel_page_rtmedia-settings");
+      await page.waitForSelector('#tab-rtmedia-bp', {timeout: 50000});
+      await page.click('#tab-rtmedia-bp');
+   
+      const element = await page.$("#rtmedia-bp-enable-activity");
+      const isCheckBoxChecked = await (await element.getProperty("checked")).jsonValue();
+       if(! isCheckBoxChecked ){
+         await element.click();
+       }
+ 
+       await page.click("div[class='rtm-button-container top'] input[value='Save Settings']");
+      await page.waitForSelector(".rtm-success.rtm-fly-warning.rtm-save-settings-msg");
+
+    } );
 
 	it( ' should upload media from activity successfully', async () => {
+      await loginUser();
        const url = page.url();
        await page.goto(url + "/activity");
        await page.click("#whats-new");
