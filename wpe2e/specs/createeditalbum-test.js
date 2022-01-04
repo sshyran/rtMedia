@@ -47,7 +47,7 @@ describe( 'Able to create and edit the album', () => {
        await page.waitForSelector("#object-nav");
        await page.click("#user-media");
        
-     await page.click("#rtmedia-nav-item-albums-li");
+      await page.click("#rtmedia-nav-item-albums");
 
      await page.click("body > div:nth-child(3) > div:nth-child(3) > div:nth-child(1) > main:nth-child(1) > article:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(4) > ul:nth-child(5) > li:nth-child(1)");
 
