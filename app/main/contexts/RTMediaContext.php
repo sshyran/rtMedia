@@ -100,6 +100,7 @@ class RTMediaContext {
 	 * Set BuddyPress component context
 	 */
 	public function set_bp_component_context() {
+
 		if ( bp_displayed_user_id() && ! bp_is_group() ) {
 			$this->type = 'profile';
 		} else {

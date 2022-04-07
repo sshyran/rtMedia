@@ -73,9 +73,7 @@ class RTMediaRouter {
 	 */
 	public function is_template() {
 		global $wp_query, $rtmedia_query;
-		//error_log( print_r( $this->slug, 1));
-		//error_log( print_r( isset( $wp_query->query_vars[ $this->slug ] ), 1));
-		//error_log( print_r( $rtmedia_query, 1));
+
 		$return = isset( $wp_query->query_vars[ $this->slug ] );
 		$return = apply_filters( 'rtmedia_return_is_template', $return, $this->slug );
 
@@ -101,15 +99,7 @@ class RTMediaRouter {
 			$wp_query->is_404 = false;
 			$return           = true;
 		}
-		//error_log( 'What is $return, 404');
-		//
-		//error_log( print_r( $return, 1));
-		//error_log( print_r( $wp_query->is_404, 1));
-		// mimic result
-		//$wp_query->is_404 = false;
-		//$return           = true;
-		//$wp_query->query_vars['media'] = '';
-		//end mimic
+
 		return $return;
 	}
 
@@ -140,6 +130,7 @@ class RTMediaRouter {
 	 * @return string File path of the template file to be loaded
 	 */
 	public function template_include( $template ) {
+
 		// if it is not our route, return the default template early.
 		if ( ! $this->is_template() ) {
 			return $template;
@@ -151,6 +142,8 @@ class RTMediaRouter {
 		 * so it can load a custom template.
 		 */
 		$template_load = new RTMediaTemplate();
+
+		buddypress()->current_component = bp_get_search_slug();
 
 		global $new_rt_template;
 		$new_rt_template = $template_load->set_template( $template );

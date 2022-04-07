@@ -56,12 +56,33 @@ if ( ! defined( 'RTMEDIA_BASE_NAME' ) ) {
 	 */
 	define( 'RTMEDIA_BASE_NAME', plugin_basename( __FILE__ ) );
 }
+
+function rtmedia_pre_get_posts( $wp_query ) {
+
+	global $wp_query;
+
+	if ( get_query_var( 'bp_members' ) && get_query_var( 'bp_member' ) && 'media' === get_query_var( 'bp_member_component' ) ) {
+
+		$pagename = '';
+
+		if ( isset( $wp_query->query_vars['pagename'] ) ) {
+			$pagename = explode( '/', $wp_query->query_vars['pagename'] );
+		}
+
+		$pagename = $pagename[0];
+		$wp_query->query_vars['pagename'] = '';
+		$wp_query->query['pagename'] = $pagename . '/pg';
+		$wp_query->query['media'] = '';
+		$wp_query->query_vars['media'] = get_query_var( 'bp_member' );
+	}
+}
+add_action( 'pre_get_posts', 'rtmedia_pre_get_posts', 99 );
+
+
 add_action( 'init', function () {
-	add_filter('rewrite_rules_array', 'move_media_top');
+//	add_filter('rewrite_rules_array', 'move_media_top');
 
 });
-
-
 function move_media_top($rules) {
 	//error_log( print_r( $rules, 1));
 	$tk= '';
@@ -80,6 +101,7 @@ function move_media_top($rules) {
 	//error_log( print_r( $rules, 1));
 	return $rules;
 }
+
 /**
  * Auto Loader Function
  *

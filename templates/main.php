@@ -41,16 +41,18 @@ if ( ! $rt_ajax_request ) {
 	} else {
 		$template_type = '';
 	}
-	error_log( 'did bp_parse_query?');
-	if ( did_action( 'bp_parse_query') ) {
-        error_log( 'bp_parse_query already fired');
-    }else{
-        error_log( 'bp_parse_query not fired yet');
-    }
-    error_log( print_r( $template_type, 1));
-    error_log( print_r( $bp_template, 1));
-    error_log( ' bp_displayed_user_id()');
-    error_log( print_r( bp_displayed_user_id(), 1));
+
+//	error_log( 'did bp_parse_query?');
+//	if ( did_action( 'bp_parse_query') ) {
+//        error_log( 'bp_parse_query already fired');
+//    }else{
+//        error_log( 'bp_parse_query not fired yet');
+//    }
+//    error_log( print_r( $template_type, 1));
+//    error_log( print_r( $bp_template, 1));
+//    error_log( ' bp_displayed_user_id()');
+//    error_log( print_r( bp_displayed_user_id(), 1));
+
 	// When Nouveau is active.
 	if ( 'nouveau' === $bp_template ) {
 
@@ -103,25 +105,25 @@ if ( ! $rt_ajax_request ) {
 					while ( bp_groups() ) :
 						bp_the_group();
 						?>
-				
+
 						<?php bp_nouveau_group_hook( 'before', 'home_content' ); ?>
-				
+
 						<div id="item-header" role="complementary" data-bp-item-id="<?php bp_group_id(); ?>" data-bp-item-component="groups" class="groups-header single-headers">
-				
+
 							<?php bp_nouveau_group_header_template_part(); ?>
-				
+
 						</div><!-- #item-header -->
-				
+
 						<div class="bp-wrap">
-				
+
 							<?php if ( ! bp_nouveau_is_object_nav_in_sidebar() ) : ?>
-				
+
 								<?php bp_get_template_part( 'groups/single/parts/item-nav' ); ?>
-				
+
 							<?php endif; ?>
-				
+
 							<div id="item-body" class="item-body">
-								
+
 								<?php
 								do_action( 'bp_before_group_body' );
 								do_action( 'bp_before_group_media' );
@@ -166,11 +168,11 @@ if ( ! $rt_ajax_request ) {
 								?>
 
 							</div><!-- // .item-body -->
-				
+
 						</div><!-- // .bp-wrap -->
-				
+
 						<?php bp_nouveau_group_hook( 'after', 'home_content' ); ?>
-				
+
 						<?php
 					endwhile;
 				}
@@ -256,7 +258,7 @@ if ( ! $rt_ajax_request ) {
 
 				// not a member profile, but a group.
 				?>
-	
+
 				<?php
 				if ( bp_has_groups() ) :
 					while ( bp_groups() ) :
